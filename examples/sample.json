@@ -1,6 +1,8 @@
 [
-  {"id":"grad-01","graduate_id":"s-01","kind":"graduate","cohort":"2024","field":"电气工程","skills":["储能","数据分析"]},
-  {"id":"place-01","graduate_id":"s-01","kind":"placement","date":"2026-06-10","status":"employed","sector":"energy","region":"县域"},
-  {"id":"req-01","graduate_id":"s-01","kind":"job_requirement","job_id":"energy-analyst","required_skills":["储能","调度"]},
-  {"id":"grad-02","graduate_id":"s-02","kind":"graduate","cohort":"2024","field":"材料工程","skills":["检测"]}
+  {"id":"grad-01","graduate_id":"s-01","kind":"graduate","cohort":"2024","field":"电气工程"},
+  {"id":"self-01","graduate_id":"s-01","kind":"placement","date":"2026-06-10","source":"student","verification":"unverified","consent":"granted","sector_code":"energy"},
+  {"id":"org-01","graduate_id":"s-01","kind":"placement","date":"2026-06-22","source":"employer","verification":"confirmed","consent":"granted","sector_code":"energy"},
+  {"id":"tax-01","graduate_id":"s-01","kind":"taxonomy","version":"2026","sector_code":"energy","category":"基层能源岗位"},
+  {"id":"grad-02","graduate_id":"s-02","kind":"graduate","cohort":"2024","field":"材料工程"},
+  {"id":"self-02","graduate_id":"s-02","kind":"placement","date":"2026-06-15","source":"student","verification":"unverified","consent":"withdrawn","sector_code":"energy"}
 ]
