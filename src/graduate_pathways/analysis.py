@@ -1,26 +1,31 @@
-"""毕业去向分析 的描述性汇总。"""
+"""计算毕业 cohort 的去向覆盖和岗位能力匹配。"""
 
 from collections import defaultdict
 
 
-def summarize(records, group_field, value_field):
-    groups = defaultdict(list)
+def summarize(records):
+    graduates = defaultdict(dict)
     for record in records:
-        group = record.get(group_field)
-        value = record.get(value_field)
-        if group is None:
-            continue
-        if isinstance(value, (int, float)) and not isinstance(value, bool):
-            groups[str(group)].append(float(value))
+        graduate = graduates[str(record["graduate_id"])]
+        if record["kind"] == "graduate":
+            graduate["profile"] = record
+        elif record["kind"] == "placement":
+            graduate.setdefault("placements", []).append(record)
         else:
-            groups[str(group)]
+            graduate.setdefault("requirements", []).append(record)
     result = {}
-    for group, values in sorted(groups.items()):
-        result[group] = {
-            "observed": len(values),
-            "missing": sum(1 for record in records if str(record.get(group_field)) == group and not isinstance(record.get(value_field), (int, float))),
-            "mean": sum(values) / len(values) if values else None,
-            "minimum": min(values) if values else None,
-            "maximum": max(values) if values else None,
+    for graduate_id, data in sorted(graduates.items()):
+        profile = data.get("profile", {})
+        placement = sorted(data.get("placements", []), key=lambda item: item.get("date", ""))
+        requirements = data.get("requirements", [])
+        skills = set(profile.get("skills", []))
+        matches = [{"job_id": item.get("job_id"), "matched": sorted(skills & set(item.get("required_skills", []))), "missing": sorted(set(item.get("required_skills", [])) - skills)} for item in requirements]
+        result[graduate_id] = {
+            "cohort": profile.get("cohort"),
+            "field": profile.get("field"),
+            "placement_status": placement[-1].get("status") if placement else "unknown",
+            "placement_count": len(placement),
+            "energy_sector": bool(placement and placement[-1].get("sector") == "energy"),
+            "job_matches": matches,
         }
     return result

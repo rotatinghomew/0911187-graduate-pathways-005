@@ -1,17 +1,7 @@
-# 毕业去向分析
+# 毕业去向与岗位匹配
 
-毕业登记与回访资料按 cohort 和观察时间整理。
+项目以本地合成数据分析不同毕业 cohort 的就业结果及基层能源岗位能力要求。`graduate` 记录个人培养方向和已掌握能力，`placement` 记录去向观察，`job_requirement` 描述岗位能力需求；没有去向记录表示未知，不作为未就业。
 
-## 数据约定
+输入为 UTF-8 JSON 数组，记录须含稳定 `id`、`graduate_id` 和 `kind`。报告给出 cohort、去向覆盖、能源行业分布以及岗位能力差距，不把岗位匹配解释成就业结果或因果关系。当前项目只看最新去向记录，尚未对更正前的已发布 cohort 结果留档。
 
-应用使用本地合成记录，输入为 UTF-8 JSON。每条记录都应有稳定的业务标识；日期采用 ISO 8601 格式。缺失值表示未观察到，不解释为数值零。输入校验、领域整理和结果汇总彼此分离，调用方可通过 Python API 使用。
-
-## 运行与测试
-
-需要 Python 3.11 或更新版本，不依赖外部服务。执行 `python -m unittest discover -s tests -v` 运行测试。将 `src` 加入 `PYTHONPATH` 后可导入 `graduate_pathways`；核心示例见 `examples/sample.json`。
-
-## 目录
-
-- `src/graduate_pathways/`：记录读取、领域计算及结果汇总。
-- `examples/`：本地合成数据。
-- `tests/`：输入边界与当前业务口径测试。
+需要 Python 3.11 或更新版本，不依赖外部服务。运行 `PYTHONPATH=src python -m unittest discover -s tests -v`。`graduate_pathways.facts` 校验记录，`graduate_pathways.analysis` 关联培养与岗位要求，`graduate_pathways.cohorts.coverage` 计算分学科去向覆盖，`graduate_pathways.reports` 汇总结果及未知去向。样例见 `examples/sample.json`。

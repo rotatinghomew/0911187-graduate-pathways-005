@@ -1,20 +1,6 @@
 [
-  {
-    "id": "sample-1",
-    "period": "2026-S1",
-    "group": "A",
-    "value": 2
-  },
-  {
-    "id": "sample-2",
-    "period": "2026-S1",
-    "group": "A",
-    "value": null
-  },
-  {
-    "id": "sample-3",
-    "period": "2026-S2",
-    "group": "B",
-    "value": 4
-  }
+  {"id":"grad-01","graduate_id":"s-01","kind":"graduate","cohort":"2024","field":"电气工程","skills":["储能","数据分析"]},
+  {"id":"place-01","graduate_id":"s-01","kind":"placement","date":"2026-06-10","status":"employed","sector":"energy","region":"县域"},
+  {"id":"req-01","graduate_id":"s-01","kind":"job_requirement","job_id":"energy-analyst","required_skills":["储能","调度"]},
+  {"id":"grad-02","graduate_id":"s-02","kind":"graduate","cohort":"2024","field":"材料工程","skills":["检测"]}
 ]
